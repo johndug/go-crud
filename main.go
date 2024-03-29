@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/go-crud/controllers"
 	"github.com/go-crud/initializers"
 )
 
@@ -12,12 +13,11 @@ func init() {
 
 func main() {
 
-	r := gin.Default()
+	route := gin.Default()
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+	route.GET("/posts", controllers.PostIndex)
+	route.POST("/posts", controllers.PostCreate)
+	route.GET("/posts/:id", controllers.PostShow)
+
+	route.Run()
 }
